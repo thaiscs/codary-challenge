@@ -2,13 +2,20 @@ import React from "react";
 import { exampleCohorts } from "../store";
 import { getDayName } from "../helpers/getDayName";
 
-function Cohorts() {
-  console.log(exampleCohorts);
+export interface Props {
+  userId: string;
+}
+
+const Cohorts: React.FC<Props> = (props: Props) => {
+  console.log(exampleCohorts, props.userId);
   return (
     <div>
       {exampleCohorts.map((cohort) => {
+        const selected = cohort.members.some(
+          (member) => member === props.userId
+        );
         return (
-          <ul key={cohort.id}>
+          <ul className={selected ? "bg-slate-300" : ""} key={cohort.id}>
             <li key={cohort.coach}>
               <b>Coach:</b> {cohort.coach}
             </li>
@@ -26,6 +33,6 @@ function Cohorts() {
       })}
     </div>
   );
-}
+};
 
 export default Cohorts;

@@ -53,5 +53,13 @@ export const exampleCohorts: Cohort[] = [
     time: "10:00",
     day: 6
   },
+  {
+    id: "4",
+    course: "8EpIqAtYYDc7KWvxXGqd",
+    coach: "Mutty Duties",
+    members: ["ZkWTvPhTpp0TAuPvpduX", "MTyWQGqJ6TP8EEhnpKur", "xaSKnf8I5I2DhJ8f227T"],
+    time: "12:00",
+    day: 2
+  }
 
 ];
