@@ -1,11 +1,27 @@
-import { exampleUser } from "../store";
+import { useState, useEffect } from "react";
+import { db } from "../server";
+import { onValue, ref } from "firebase/database";
 import Cohorts from "./Cohorts";
 import Course from "./Course";
 export default function UserCohort() {
+  const [user, setUser] = useState({ name: "", id: "" });
+
+  useEffect(() => {
+    const query = ref(db, "User");
+
+    return onValue(query, (snapshot) => {
+      const user = snapshot.val();
+      console.log("user", user);
+      if (snapshot.exists()) {
+        setUser(user);
+      }
+    });
+  }, []);
+
   return (
     <div>
-      {exampleUser.name}, you chose the course <Course />
-      <Cohorts userId={exampleUser.id} />
+      {user.name}, you chose the course <Course />
+      <Cohorts userId={user.id} />
     </div>
   );
 }
