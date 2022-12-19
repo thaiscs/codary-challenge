@@ -1,4 +1,3 @@
-import React from "react";
 import { exampleUser } from "../store";
 import Cohorts from "./Cohorts";
 import Course from "./Course";

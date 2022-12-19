@@ -14,9 +14,10 @@ Feel free to create as many cohorts in the `store.ts` file as you like. The data
 
 MY TODO:
 0. Create Repository on GitHub
-1. Create component Cohorts to display all cohorts available
-1.2. Create cohorts_details component to expand details
-2. Allow click/selection of one cohort for user to join
-3. Create component User to display user's cohorts
-4. Tailwind config for styling
+<!-- 1. Create component Cohorts to display all cohorts available -->
+<!-- 1.2. Create cohorts_details component to expand details -->
+<!-- 2. Allow click/selection of one cohort for user to join -->
+<!-- 3. Create component User to display user's cohorts -->
+<!-- 4. Tailwind config for styling -->
 5. Use Firebase as a backend to save selection?
+6. Style page
