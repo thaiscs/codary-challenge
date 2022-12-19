@@ -11,7 +11,6 @@ export default function UserCohort() {
 
     return onValue(query, (snapshot) => {
       const user = snapshot.val();
-      console.log("user", user);
       if (snapshot.exists()) {
         setUser(user);
       }

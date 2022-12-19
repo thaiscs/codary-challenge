@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { getDayName } from "../helpers/getDayName";
 import { db } from "../server";
 import { getDatabase, onValue, ref, set } from "firebase/database";
-
 interface Props {
   userId: string;
 }
@@ -18,6 +17,7 @@ interface Cohort {
 }
 
 const Cohorts: React.FC<Props> = (props: Props) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [cohorts, setCohorts] = useState<Cohort[]>([]);
   const [selection, setSelection] = useState(false);
 
@@ -38,7 +38,14 @@ const Cohorts: React.FC<Props> = (props: Props) => {
       members: members,
       time: time,
       day: day,
-    });
+    })
+      .then(() => {
+        alert("Updated successfully!");
+      })
+      .catch((error) => {
+        alert("Please try again");
+        console.log(error);
+      });
   }
 
   useEffect(() => {
@@ -52,11 +59,14 @@ const Cohorts: React.FC<Props> = (props: Props) => {
           return cohort;
         });
         setCohorts(state);
+        setIsLoading(!isLoading);
+      } else {
+        alert("There was a problem with the server :(");
       }
     });
   }, []);
 
-  const selectCohort = (index: number, server_id: string) => {
+  const selectCohort = (index: number) => {
     const members = cohorts[index].members;
     const isSelected = members.some((member) => member === props.userId);
     const selectedAtPosition = (member: string) => member === props.userId;
@@ -86,32 +96,35 @@ const Cohorts: React.FC<Props> = (props: Props) => {
 
   return (
     <div>
-      {cohorts.map((cohort, index) => {
-        const selection = cohort.members.some(
-          (member) => member === props.userId
-        );
-        return (
-          <button
-            key={index}
-            onClick={() => selectCohort(index, cohort.server_id)}
-          >
-            <ul className={selection ? "bg-slate-300" : ""} key={cohort.id}>
-              <li key={cohort.coach}>
-                <b>Coach:</b> {cohort.coach}
-              </li>
-              <li key={cohort.day}>
-                <b>Day:</b> {getDayName(cohort.day)}
-              </li>
-              <li key={cohort.time}>
-                <b>Time:</b> {cohort.time}
-              </li>
-              <li key={cohort.members[1]}>
-                <b>Members:</b> {cohort.members.length}
-              </li>
-            </ul>
-          </button>
-        );
-      })}
+      {isLoading ? (
+        <div className="w-screen h-screen">
+          <b>Loading Cohorts...</b>
+        </div>
+      ) : (
+        cohorts.map((cohort, index) => {
+          const selection = cohort.members.some(
+            (member) => member === props.userId
+          );
+          return (
+            <button key={index} onClick={() => selectCohort(index)}>
+              <ul className={selection ? "bg-slate-300" : ""} key={cohort.id}>
+                <li key={cohort.coach}>
+                  <b>Coach:</b> {cohort.coach}
+                </li>
+                <li key={cohort.day}>
+                  <b>Day:</b> {getDayName(cohort.day)}
+                </li>
+                <li key={cohort.time}>
+                  <b>Time:</b> {cohort.time}
+                </li>
+                <li key={cohort.members[1]}>
+                  <b>Members:</b> {cohort.members.length}
+                </li>
+              </ul>
+            </button>
+          );
+        })
+      )}
       <button onClick={submit}>
         <b>BOOK</b>
       </button>

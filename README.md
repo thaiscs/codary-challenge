@@ -19,5 +19,5 @@ MY TODO:
 <!-- 2. Allow click/selection of one cohort for user to join -->
 <!-- 3. Create component User to display user's cohorts -->
 <!-- 4. Tailwind config for styling -->
-5. Use Firebase as a backend to save selection?
+<!-- 5. Use Firebase as a backend to save selection? -->
 6. Style page
