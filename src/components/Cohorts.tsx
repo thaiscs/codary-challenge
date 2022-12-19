@@ -95,7 +95,7 @@ const Cohorts: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <div>
+    <div className="p-4 flex flex-col">
       {isLoading ? (
         <div className="w-screen h-screen">
           <b>Loading Cohorts...</b>
@@ -106,16 +106,20 @@ const Cohorts: React.FC<Props> = (props: Props) => {
             (member) => member === props.userId
           );
           return (
-            <button key={index} onClick={() => selectCohort(index)}>
+            <button
+              className="m-4"
+              key={index}
+              onClick={() => selectCohort(index)}
+            >
               <ul className={selection ? "bg-slate-300" : ""} key={cohort.id}>
-                <li key={cohort.coach}>
-                  <b>Coach:</b> {cohort.coach}
-                </li>
                 <li key={cohort.day}>
-                  <b>Day:</b> {getDayName(cohort.day)}
+                  Day:<b>{getDayName(cohort.day)}</b>
                 </li>
                 <li key={cohort.time}>
-                  <b>Time:</b> {cohort.time}
+                  Time:<b>{cohort.time}</b>
+                </li>
+                <li key={cohort.coach}>
+                  <b>Coach:</b> {cohort.coach}
                 </li>
                 <li key={cohort.members[1]}>
                   <b>Members:</b> {cohort.members.length}
@@ -125,7 +129,10 @@ const Cohorts: React.FC<Props> = (props: Props) => {
           );
         })
       )}
-      <button onClick={submit}>
+      <button
+        className="w-full p-2 border border-solid border-black mt-8"
+        onClick={submit}
+      >
         <b>BOOK</b>
       </button>
     </div>

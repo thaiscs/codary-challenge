@@ -19,7 +19,11 @@ export default function UserCohort() {
 
   return (
     <div>
-      {user.name}, you chose the course <Course />
+      Hello {user.name}!
+      <p className="p-2">
+        How exciting that you've chosen the course <Course /> :)
+      </p>
+      <p className="italic p-2">Now select a group to join:</p>
       <Cohorts userId={user.id} />
     </div>
   );
